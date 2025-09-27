@@ -5,6 +5,31 @@
 .products__filter {
   margin-bottom: 15px;
 
+  .close {
+    display: none;
+    margin-left: auto;
+    width: 24px;
+    margin-bottom: 20px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &__btn {
+    border: 1px solid colors.$yellow;
+    border-radius: 4px;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+
+    img {
+      width: 60%;
+    }
+  }
+
   &__submit {
     color: colors.$black;
     border: 1px solid colors.$blue;
@@ -22,6 +47,45 @@
     &:hover {
       background: color.adjust($color: colors.$blue, $lightness: -10%);
       border-color: color.adjust($color: colors.$blue, $lightness: -10%);
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .products__filter {
+    &__btn {
+      display: flex;
+    }
+    .close {
+      display: block;
+    }
+
+    &__filter {
+      position: fixed;
+      z-index: 100;
+      top: 0;
+      background: colors.$blue;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+      padding: 15px;
+      box-sizing: border-box;
+      display: none;
+
+      &--active {
+        display: block;
+        animation: test 0.3s forwards;
+
+        @keyframes test {
+          from {
+            left: 100%;
+          }
+          to {
+            left: 0;
+          }
+        }
+      }
     }
   }
 }

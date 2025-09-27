@@ -4,3 +4,5 @@ export { default as Logo } from "./logo.png";
 export { default as Twitter } from "./twitter.png";
 export { default as Facebook } from "./facebook.png";
 export { default as Youtube } from "./youtube.png";
+export { default as Close } from "./close.png";
+export { default as FilterIcon } from "./filter.png";

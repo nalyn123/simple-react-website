@@ -1,10 +1,12 @@
 import { fetchProducts } from "@store/products-store";
 import { AppDispatch } from "@store/store";
 import { productFilter } from "@utils/enum";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 export const useFilter = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const searchInput = {
     type: "text",
@@ -49,5 +51,21 @@ export const useFilter = () => {
     dispatch(fetchProducts(data));
   };
 
-  return { searchInput, sortData, onSortBy, onDateChange };
+  const onFilterClick = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const onFilterClose = () => {
+    setIsOpen(false);
+  };
+
+  return {
+    isOpen,
+    searchInput,
+    sortData,
+    onSortBy,
+    onDateChange,
+    onFilterClick,
+    onFilterClose,
+  };
 };
