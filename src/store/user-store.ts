@@ -31,8 +31,7 @@ export const fetchLogin = createAsyncThunk(
 
 export const fetchUser = createAsyncThunk("users/fetchUser", async () => {
   try {
-    const payload = CommonUtils.getDataFromToken();
-
+    const payload = await CommonUtils.getDataFromToken();
     return payload;
   } catch (error) {
     return {};
@@ -59,7 +58,7 @@ const userSice = createSlice({
   initialState,
   reducers: {
     setLogout: (state) => {
-      sessionStorage.removeItem(login.TOKEN);
+      localStorage.removeItem(login.TOKEN);
       state.auth = {};
     },
   },

@@ -34,7 +34,7 @@ export class CommonUtils {
     try {
       const token = localStorage.getItem(login.TOKEN) || "";
       const { payload } = await jwtVerify(token, this._secret);
-      return payload ?? {};
+      return payload;
     } catch (error) {
       throw Error("getDataFromToken Error");
     }
