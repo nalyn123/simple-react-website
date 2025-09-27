@@ -2,16 +2,12 @@ import { useDatePicker } from "./datepicker-model";
 import { DatePickerProps } from "./datepicker.interface";
 import { DateRangePicker } from "react-date-range";
 import "./datepicker.scss";
+import { useState } from "react";
 
 const DatePicker = (props: DatePickerProps) => {
-  const { ref, isOpen, onClick } = useDatePicker();
+  const { ref, isOpen, selectionRange, onChange, onClick } =
+    useDatePicker(props);
   const { className, placeholder } = props || {};
-
-  const selectionRange = {
-    startDate: new Date(),
-    endDate: new Date(),
-    key: "selection",
-  };
 
   return (
     <div ref={ref} className={`datepicker ${className ?? ""}`}>
@@ -28,7 +24,7 @@ const DatePicker = (props: DatePickerProps) => {
         <div className="datepicker__menu">
           <DateRangePicker
             ranges={[selectionRange]}
-            onChange={props?.onChange}
+            onChange={onChange}
             className="datepicker__datepicker"
           />
         </div>

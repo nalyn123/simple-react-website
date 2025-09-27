@@ -1,8 +1,24 @@
 import { useEffect, useRef, useState } from "react";
+import { DatePickerProps } from "./datepicker.interface";
 
-export const useDatePicker = () => {
+export const useDatePicker = (props: DatePickerProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
+  const [start, setStart] = useState<Date>(new Date());
+  const [end, setEnd] = useState<Date>(new Date());
+
+  const selectionRange = {
+    startDate: start,
+    endDate: end,
+    key: "selection",
+  };
+
+  const onChange = (e: any) => {
+    const { startDate, endDate } = e?.selection;
+    setStart(startDate);
+    setEnd(endDate);
+    props?.onChange(e);
+  };
 
   const onClick = () => {
     setIsOpen((prev) => !prev);
@@ -22,5 +38,5 @@ export const useDatePicker = () => {
       document.removeEventListener("touchstart", onOutsideClick);
     };
   }, [ref]);
-  return { ref, isOpen, onClick };
+  return { ref, isOpen, selectionRange, onChange, onClick };
 };
