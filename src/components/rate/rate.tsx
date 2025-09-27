@@ -2,7 +2,7 @@ import { RateProps } from "./rate.interface";
 import "./rate.scss";
 
 const Rate = (props: RateProps) => {
-  const { rate } = props;
+  const { rate } = props || {};
   return (
     <div className="rate">
       {Array.from({ length: 5 }, (_, i) => (

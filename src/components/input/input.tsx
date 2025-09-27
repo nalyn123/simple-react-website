@@ -2,7 +2,14 @@ import { InputProps } from "./input.interface";
 import "./input.scss";
 
 const Input = (props: InputProps) => {
-  const { className, register, name = "", required = false, error } = props;
+  const {
+    className,
+    register,
+    name = "",
+    required = false,
+    error,
+    onChange,
+  } = props;
   return (
     <div className="input">
       <input
@@ -13,6 +20,7 @@ const Input = (props: InputProps) => {
         required={false}
         className={`input__input ${className ?? ""}`}
         autoComplete="off"
+        onChange={onChange}
       />
       {error && <span className="input__error">{error}</span>}
     </div>

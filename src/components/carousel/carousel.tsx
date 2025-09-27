@@ -5,7 +5,7 @@ import "./carousel.scss";
 import { ProductItem } from "@components/index";
 
 const Slider = (props: SliderProps) => {
-  const { data, title } = props;
+  const { data, title } = props || {};
 
   if (!data.length) return;
 

@@ -3,7 +3,7 @@ import { useDropdown } from "./dropdown-model";
 import { DropdownProps } from "./dropdown.interface";
 
 const Dropdown = (props: DropdownProps) => {
-  const { data, className, placeholder } = props;
+  const { data, className, placeholder } = props || {};
   const { ref, active, isOpen, onClick, onItemClick } = useDropdown(props);
 
   return (

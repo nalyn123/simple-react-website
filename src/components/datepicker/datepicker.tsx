@@ -5,7 +5,7 @@ import "./datepicker.scss";
 
 const DatePicker = (props: DatePickerProps) => {
   const { ref, isOpen, onClick } = useDatePicker();
-  const { className, placeholder } = props;
+  const { className, placeholder } = props || {};
 
   const selectionRange = {
     startDate: new Date(),

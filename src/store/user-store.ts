@@ -5,7 +5,6 @@ import {
   LoginProps,
   UserStoreProps,
 } from "./interface/user-store.interface";
-import { SignJWT, jwtVerify } from "jose";
 import { login } from "@utils/enum";
 import { RootState } from "./store";
 import { CommonUtils } from "@utils/common-utils";
@@ -64,15 +63,24 @@ const userSice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchLogin.fulfilled, (state, action) => {
-        state.auth = action.payload;
-      })
-      .addCase(fetchUser.fulfilled, (state, action) => {
-        state.auth = action.payload;
-      })
-      .addCase(fetchUserUpdate.fulfilled, (state, action) => {
-        state.auth = action.payload;
-      });
+      .addCase(
+        fetchLogin.fulfilled,
+        (state, action: PayloadAction<AuthProps>) => {
+          state.auth = action.payload;
+        }
+      )
+      .addCase(
+        fetchUser.fulfilled,
+        (state, action: PayloadAction<AuthProps>) => {
+          state.auth = action.payload;
+        }
+      )
+      .addCase(
+        fetchUserUpdate.fulfilled,
+        (state, action: PayloadAction<AuthProps>) => {
+          state.auth = action.payload;
+        }
+      );
   },
 });
 

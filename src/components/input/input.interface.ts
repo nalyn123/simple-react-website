@@ -6,4 +6,5 @@ export interface InputProps {
   name?: string;
   required?: boolean;
   error?: string;
+  onChange?: Function;
 }

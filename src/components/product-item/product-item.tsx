@@ -5,7 +5,7 @@ import { Favorite } from "@components/index";
 import { useProductItem } from "./product-item-model";
 
 const ProductItem = (props: ProductItemProps) => {
-  const { id, title } = props;
+  const { id, title } = props || {};
   const { onProductClick } = useProductItem();
 
   return (
