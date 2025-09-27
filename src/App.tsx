@@ -8,6 +8,7 @@ import { routes } from "./router";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState, store } from "@store/store";
 import { fetchUser } from "@store/user-store";
+import { CommonUtils } from "@utils/common-utils";
 
 interface ProtectedRouteProps {
   component: ComponentType;
@@ -47,11 +48,15 @@ const AppController = () => {
 const ProtectedRoute = (props: ProtectedRouteProps) => {
   const { auth } = useSelector((state: RootState) => state.user);
 
-  return (!auth && props?.auth) || (auth && props?.auth === false) ? (
-    <Navigate to="/" />
-  ) : (
-    <Layout component={props?.component} />
-  );
+  if (auth === null) {
+    return <></>;
+  }
+
+  if (CommonUtils.checkAuth(props.auth)) {
+    return <Navigate to="/" />;
+  }
+
+  return <Layout component={props?.component} />;
 };
 
 const Layout = ({ component: Component }: { component: ComponentType }) => {

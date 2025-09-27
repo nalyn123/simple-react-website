@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 export const useLogin = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { auth } = useSelector((state: RootState) => state.user);
 
   const {
     register,

@@ -1,3 +1,4 @@
+import { CommonUtils } from "@utils/common-utils";
 import { useNavbar } from "./navbar-model";
 import "./navbar.scss";
 import { Logo } from "@assets/images";
@@ -26,7 +27,7 @@ const Navbar = () => {
       >
         <ul>
           {navLists.map((value, index) =>
-            (!auth && value?.auth) || (auth && value?.auth === false) ? (
+            CommonUtils.checkAuth(value?.auth) ? (
               <></>
             ) : (
               <li

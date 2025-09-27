@@ -1,0 +1,49 @@
+@use "@utils/css/color" as colors;
+@use "@utils/css/space" as space;
+
+.settings {
+  width: 360px;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-inline: auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: space.$border-radius;
+
+  &__profile {
+    text-align: center;
+    img {
+      width: 60px;
+      border-radius: 100%;
+    }
+  }
+
+  &__info {
+    color: colors.$violet;
+    font-weight: bold;
+    padding-block: 5px;
+    display: flex;
+    align-items: center;
+
+    & > span {
+      font-weight: normal;
+      color: colors.$black;
+      margin-left: 5px;
+    }
+
+    .edit {
+      color: colors.$blue;
+      font-size: 12px;
+      display: inline-block;
+      cursor: pointer;
+    }
+  }
+
+  .btn {
+    color: colors.$yellow;
+    border-color: colors.$violet;
+    background: colors.$violet;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+}

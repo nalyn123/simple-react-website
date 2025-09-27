@@ -1,4 +1,11 @@
-import { Home, Products, Product, Login } from "@pages/index";
+import {
+  Home,
+  Products,
+  Product,
+  Login,
+  Settings,
+  UpdateProfile,
+} from "@pages/index";
 
 export const routes = [
   {
@@ -20,7 +27,12 @@ export const routes = [
   },
   {
     path: "/settings",
-    component: Home,
+    component: Settings,
+    auth: true,
+  },
+  {
+    path: "/settings/:type",
+    component: UpdateProfile,
     auth: true,
   },
 ];

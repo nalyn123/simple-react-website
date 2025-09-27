@@ -1,6 +1,14 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { LoginProps, UserStoreProps } from "./interface/user-store.interface";
+import {
+  AuthProps,
+  InputProps,
+  LoginProps,
+  UserStoreProps,
+} from "./interface/user-store.interface";
 import { SignJWT, jwtVerify } from "jose";
+import { login } from "@utils/enum";
+import { RootState } from "./store";
+import { CommonUtils } from "@utils/common-utils";
 const secret = new TextEncoder().encode("jwt-secret");
 
 const initialState: UserStoreProps = {
@@ -16,28 +24,45 @@ export const fetchLogin = createAsyncThunk(
       lastname: "Last",
     };
 
-    const token = await new SignJWT(data)
-      .setProtectedHeader({ alg: "HS256" })
-      .setIssuedAt()
-      .setExpirationTime("24h")
-      .sign(secret);
-
-    localStorage.setItem("token", token);
-
+    await CommonUtils.setToken(data);
     return data;
   }
 );
 
 export const fetchUser = createAsyncThunk("users/fetchUser", async () => {
-  const token = localStorage.getItem("token") || "";
-  const { payload } = await jwtVerify(token, secret);
-  return payload;
+  try {
+    const payload = CommonUtils.getDataFromToken();
+
+    return payload;
+  } catch (error) {
+    return {};
+  }
+});
+
+export const fetchUserUpdate = createAsyncThunk<
+  AuthProps,
+  InputProps,
+  { state: RootState }
+>("users/fetchUserUpdate", async ({ type, value }: InputProps, thunkAPI) => {
+  const state = thunkAPI.getState()?.user;
+  const data = {
+    ...state?.auth,
+    [type ?? ""]: value,
+  };
+
+  await CommonUtils.setToken(data);
+  return data;
 });
 
 const userSice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    setLogout: (state) => {
+      sessionStorage.removeItem(login.TOKEN);
+      state.auth = {};
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchLogin.fulfilled, (state, action) => {
@@ -45,9 +70,12 @@ const userSice = createSlice({
       })
       .addCase(fetchUser.fulfilled, (state, action) => {
         state.auth = action.payload;
+      })
+      .addCase(fetchUserUpdate.fulfilled, (state, action) => {
+        state.auth = action.payload;
       });
   },
 });
 
-// export const { setAuth } = userSice.actions;
+export const { setLogout } = userSice.actions;
 export default userSice.reducer;

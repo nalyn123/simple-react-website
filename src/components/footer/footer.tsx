@@ -1,6 +1,7 @@
 import "./footer.scss";
 import { Logo, Twitter, Facebook, Youtube } from "@assets/images";
 import { useFooter } from "./footer-model";
+import { CommonUtils } from "@utils/common-utils";
 
 const Footer = () => {
   const { auth, footerLists, onClick } = useFooter();
@@ -43,7 +44,7 @@ const Footer = () => {
               <p className="footer__links__header">{value?.label}</p>
               <ul className="footer__links__menu">
                 {value?.children?.map((list, i) =>
-                  (!auth && list?.auth) || (auth && list?.auth === false) ? (
+                  CommonUtils.checkAuth(list?.auth) ? (
                     <></>
                   ) : (
                     <li key={i}>

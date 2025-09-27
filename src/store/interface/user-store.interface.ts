@@ -13,3 +13,8 @@ export interface LoginProps {
   email: string;
   password: string;
 }
+
+export interface InputProps {
+  type?: string;
+  value?: string;
+}
