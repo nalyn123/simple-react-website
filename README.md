@@ -8,8 +8,6 @@ npm install
 
 ## Run project
 
-### `npm start`
-
 ```bash
 npm start
 ```
