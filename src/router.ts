@@ -15,7 +15,7 @@ export const routes = [
   },
   {
     path: "/login",
-    component: Home,
+    component: Products,
     auth: false,
   },
   {
