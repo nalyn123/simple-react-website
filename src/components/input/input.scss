@@ -1,0 +1,18 @@
+@use "@utils/css/color" as colors;
+@use "@utils/css/space" as space;
+
+.input {
+  color: colors.$yellow;
+  border: 1px solid colors.$yellow;
+  border-radius: space.$border-radius;
+  height: 40px;
+  padding-inline: space.$padding;
+  background: none;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 16px;
+
+  &::placeholder {
+    color: colors.$yellow;
+  }
+}

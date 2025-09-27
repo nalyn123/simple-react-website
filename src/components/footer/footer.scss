@@ -1,0 +1,54 @@
+@use "@utils/css/color.scss" as colors;
+.footer {
+  background: #a6d6d6;
+  box-shadow: 0 999999px 0 999999px #a6d6d6;
+  padding-block: 30px;
+
+  &__info {
+    &__logo {
+      border-radius: 100%;
+      width: 40px;
+      display: block;
+      margin-bottom: 15px;
+    }
+
+    &__desc {
+      font-size: 12px;
+      color: colors.$black;
+    }
+
+    &__sm {
+      display: flex;
+      gap: 10px;
+
+      img {
+        width: 30px;
+      }
+    }
+  }
+
+  &__links {
+    margin-top: 15px;
+    &__header {
+      color: colors.$violet;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    &__menu li {
+      margin-bottom: 5px;
+      button {
+        color: colors.$black;
+        font-size: 14px;
+        border-bottom: 1px solid transparent;
+
+        &:hover {
+          color: colors.$violet;
+          border-color: colors.$violet;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+}

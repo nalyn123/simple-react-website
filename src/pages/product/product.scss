@@ -1,0 +1,54 @@
+@use "sass:color";
+@use "@utils/css/color" as colors;
+@use "@utils/css/space" as space;
+
+.product {
+  position: relative;
+  background: colors.$yellow;
+  padding: 30px;
+  border-radius: 15px;
+
+  &__img {
+    border-radius: 8px;
+    display: block;
+  }
+  &__title {
+    font-size: 32px;
+    color: colors.$violet;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 5px;
+
+    span {
+      font-size: 60%;
+      color: colors.$black;
+      font-weight: normal;
+    }
+  }
+  &__text {
+    font-size: 16px;
+    color: colors.$black;
+    margin-bottom: 10px;
+
+    &__title {
+      font-weight: bold;
+    }
+  }
+
+  &__submit {
+    padding: 10px space.$padding;
+    border-radius: space.$border-radius;
+    border: 1px solid colors.$violet;
+    background: colors.$violet;
+    font-size: 18px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      background: color.adjust(colors.$violet, $lightness: -10%);
+      border-color: color.adjust(colors.$violet, $lightness: -10%);
+    }
+  }
+}

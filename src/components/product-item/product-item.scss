@@ -1,0 +1,33 @@
+@use "@utils/css/color.scss" as colors;
+
+.product__item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+
+  img {
+    display: block;
+    width: 100%;
+  }
+
+  &__hover {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    color: colors.$violet;
+    background: rgba(244, 248, 211, 0.6);
+    margin: 0;
+    padding: 15px 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 12px;
+    transition: all 0.3s;
+  }
+
+  &:hover &__hover {
+    bottom: 0;
+  }
+}

@@ -1,0 +1,45 @@
+@use "sass:color";
+@use "@utils/css/color.scss" as colors;
+@use "@utils/css/space" as space;
+
+.datepicker {
+  position: relative;
+
+  &__active {
+    color: colors.$yellow;
+    border: 1px solid colors.$yellow;
+    border-radius: space.$border-radius;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding-inline: space.$padding;
+    cursor: pointer;
+
+    .icon {
+      display: inline-block;
+      width: 20px;
+      height: 100%;
+      background: url("@assets/images/calendar.png") no-repeat;
+      background-position: center;
+      background-size: 18px auto;
+      transition: all 0.3s;
+    }
+  }
+
+  &__menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    z-index: 10;
+    box-sizing: border-box;
+    transform: translateX(100%);
+  }
+
+  &__datepicker {
+    transform: translateX(-100%);
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+  }
+}

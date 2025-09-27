@@ -1,0 +1,59 @@
+@use "@utils/css/color.scss" as colors;
+
+.slider {
+  margin-bottom: 30px;
+
+  &__header {
+    margin: 0;
+    padding: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    color: colors.$yellow;
+  }
+
+  .carousel__arrow {
+    top: 0;
+    transform: none;
+    border-radius: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent);
+    opacity: 0.8;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &__disabled,
+    &__disabled:hover {
+      opacity: 0.4;
+    }
+
+    &__icon {
+      &::before,
+      &::after {
+        top: -13px;
+        left: -15px;
+      }
+    }
+
+    &__left {
+      left: 0;
+    }
+    &__right {
+      right: 0;
+      transform: scaleX(-1);
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .slider {
+    &__header {
+      font-size: 28px;
+    }
+  }
+}

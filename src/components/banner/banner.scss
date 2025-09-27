@@ -1,0 +1,17 @@
+@use "@utils/css/color.scss" as colors;
+.banner-slider {
+  img {
+    min-height: 300px;
+    object-fit: cover;
+  }
+  .carousel__page__item {
+    width: 22px;
+    height: 5px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.2);
+
+    &__active {
+      background: colors.$violet;
+    }
+  }
+}

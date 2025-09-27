@@ -1,0 +1,15 @@
+@use "@utils/css/color" as colors;
+
+.rate {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 15px;
+
+  &__item {
+    color: rgba(0, 0, 0, 0.2);
+    cursor: default;
+    &__active {
+      color: colors.$gold;
+    }
+  }
+}

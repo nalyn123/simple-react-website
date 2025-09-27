@@ -1,0 +1,57 @@
+@use "sass:color";
+@use "@utils/css/color.scss" as colors;
+@use "@utils/css/space" as space;
+
+.dropdown {
+  position: relative;
+
+  &__active {
+    color: colors.$yellow;
+    border: 1px solid colors.$yellow;
+    border-radius: space.$border-radius;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding-inline: space.$padding;
+    cursor: pointer;
+
+    .arrow {
+      display: inline-block;
+      width: 20px;
+      height: 100%;
+      background: url("@assets/images/arrow-down.png") no-repeat;
+      background-position: center;
+      background-size: 14px auto;
+      transition: all 0.3s;
+    }
+
+    &__open .arrow {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: colors.$yellow;
+    z-index: 10;
+    min-height: 100px;
+    border-radius: space.$border-radius;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    &__list {
+      padding: 10px space.$padding;
+      color: colors.$black;
+      cursor: pointer;
+
+      &:hover {
+        background: color.adjust(colors.$yellow, $lightness: -10%);
+      }
+    }
+  }
+}

@@ -1,0 +1,97 @@
+@use "@utils/css/color.scss" as colors;
+@use "@utils/css/space.scss" as space;
+
+body {
+  background: colors.$violet;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+// text
+p {
+  margin-block: 0 15px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+// width
+.w-full {
+  width: 100%;
+}
+
+// button
+button {
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+// container
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 15px;
+  box-sizing: border-box;
+
+  &--py {
+    margin-block: 50px 90px;
+  }
+}
+
+// rows and columns
+.row {
+  display: flex;
+  // justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  gap: space.$col-gap;
+  max-width: 100%;
+}
+.col {
+  width: calc(
+    var(--col-num) / 12 * 100% - space.$col-gap + var(--col-num) * 1px
+  );
+  flex: 0 0
+    calc(var(--col-num) / 12 * 100% - space.$col-gap + var(--col-num) * 1px);
+}
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    --col-num: #{$i};
+  }
+}
+@media screen and (min-width: 768px) {
+  @for $i from 1 through 12 {
+    .col-sm-#{$i} {
+      --col-num: #{$i};
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  @for $i from 1 through 12 {
+    .col-md-#{$i} {
+      --col-num: #{$i};
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  @for $i from 1 through 12 {
+    .col-lg-#{$i} {
+      --col-num: #{$i};
+    }
+  }
+}

@@ -1,0 +1,30 @@
+@use "@utils/css/color.scss" as colors;
+
+.breadcrumbs {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 15px;
+  &__item {
+    display: flex;
+    cursor: pointer;
+    font-size: 16px;
+    color: colors.$yellow;
+    align-items: center;
+    padding: 5px;
+
+    &:not(&--text):hover {
+      text-decoration: underline;
+    }
+
+    &--text {
+      cursor: default;
+    }
+  }
+
+  &__arrow {
+    color: colors.$yellow;
+    font-size: 16px;
+    padding: 5px 0;
+    cursor: default;
+  }
+}
