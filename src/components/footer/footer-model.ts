@@ -1,25 +1,16 @@
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "@store/store";
+import lists from "@utils/menu";
 
 export const useFooter = () => {
   const navigate = useNavigate();
+  const { auth } = useSelector((state: RootState) => state.user);
 
   const footerLists = [
     {
       label: "Lorem Ipsum",
-      children: [
-        {
-          path: "/",
-          label: "Home",
-        },
-        {
-          path: "/products",
-          label: "Products",
-        },
-        {
-          path: "/login",
-          label: "Login",
-        },
-      ],
+      children: lists,
     },
     {
       label: "Lorem Ipsum",
@@ -61,5 +52,5 @@ export const useFooter = () => {
     navigate(url);
   };
 
-  return { footerLists, onClick };
+  return { auth, footerLists, onClick };
 };

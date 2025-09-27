@@ -1,12 +1,13 @@
-import React, { ComponentType } from "react";
+import React, { ComponentType, useEffect } from "react";
 import "./App.scss";
 
 import { Navbar, Footer } from "@components/index";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { routes } from "./router";
-import { Provider, useSelector } from "react-redux";
-import { RootState, store } from "@store/store";
+import { Provider, useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState, store } from "@store/store";
+import { fetchUser } from "@store/user-store";
 
 interface ProtectedRouteProps {
   component: ComponentType;
@@ -17,23 +18,36 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Routes>
-          {routes.map((value, index) => (
-            <Route
-              key={index}
-              path={value?.path}
-              element={<ProtectedRoute {...value} />}
-            ></Route>
-          ))}
-        </Routes>
+        <AppController />
       </BrowserRouter>
     </Provider>
   );
 }
 
+const AppController = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, []);
+
+  return (
+    <Routes>
+      {routes.map((value, index) => (
+        <Route
+          key={index}
+          path={value?.path}
+          element={<ProtectedRoute {...value} />}
+        ></Route>
+      ))}
+    </Routes>
+  );
+};
+
 const ProtectedRoute = (props: ProtectedRouteProps) => {
   const { auth } = useSelector((state: RootState) => state.user);
-  return auth && props?.auth ? (
+
+  return (!auth && props?.auth) || (auth && props?.auth === false) ? (
     <Navigate to="/" />
   ) : (
     <Layout component={props?.component} />

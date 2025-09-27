@@ -1,25 +1,16 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import lists from "@utils/menu";
+import { useSelector } from "react-redux";
+import { RootState } from "@store/store";
 
 export const useNavbar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [burgerActive, setBurgerActive] = useState(false);
+  const { auth } = useSelector((state: RootState) => state.user);
 
-  const navLists = [
-    {
-      path: "/",
-      label: "Home",
-    },
-    {
-      path: "/products",
-      label: "Products",
-    },
-    {
-      path: "/login",
-      label: "Login",
-    },
-  ];
+  const navLists = lists;
 
   const onBurgerClick = () => {
     setBurgerActive((prev) => !prev);
@@ -29,5 +20,5 @@ export const useNavbar = () => {
     navigate(url);
   };
 
-  return { navLists, pathname, burgerActive, onBurgerClick, onClick };
+  return { auth, navLists, pathname, burgerActive, onBurgerClick, onClick };
 };

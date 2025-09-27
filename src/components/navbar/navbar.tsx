@@ -3,7 +3,7 @@ import "./navbar.scss";
 import { Logo } from "@assets/images";
 
 const Navbar = () => {
-  const { navLists, pathname, burgerActive, onBurgerClick, onClick } =
+  const { auth, navLists, pathname, burgerActive, onBurgerClick, onClick } =
     useNavbar();
 
   return (
@@ -25,16 +25,20 @@ const Navbar = () => {
         className={`navbar__menu ${burgerActive ? "navbar__menu__active" : ""}`}
       >
         <ul>
-          {navLists.map((value, index) => (
-            <li
-              key={index}
-              className={`${pathname === value?.path ? "active" : ""}`}
-            >
-              <button type="button" onClick={() => onClick(value?.path)}>
-                {value?.label}
-              </button>
-            </li>
-          ))}
+          {navLists.map((value, index) =>
+            (!auth && value?.auth) || (auth && value?.auth === false) ? (
+              <></>
+            ) : (
+              <li
+                key={index}
+                className={`${pathname === value?.path ? "active" : ""}`}
+              >
+                <button type="button" onClick={() => onClick(value?.path)}>
+                  {value?.label}
+                </button>
+              </li>
+            )
+          )}
         </ul>
       </div>
     </nav>

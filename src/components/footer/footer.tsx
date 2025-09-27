@@ -3,7 +3,7 @@ import { Logo, Twitter, Facebook, Youtube } from "@assets/images";
 import { useFooter } from "./footer-model";
 
 const Footer = () => {
-  const { footerLists, onClick } = useFooter();
+  const { auth, footerLists, onClick } = useFooter();
   return (
     <footer className="footer">
       <div className="container">
@@ -42,13 +42,17 @@ const Footer = () => {
             <div key={index} className="footer__links col col-12 col-sm-2">
               <p className="footer__links__header">{value?.label}</p>
               <ul className="footer__links__menu">
-                {value?.children?.map((list, i) => (
-                  <li key={i}>
-                    <button type="button" onClick={() => onClick(list?.path)}>
-                      {list?.label}
-                    </button>
-                  </li>
-                ))}
+                {value?.children?.map((list, i) =>
+                  (!auth && list?.auth) || (auth && list?.auth === false) ? (
+                    <></>
+                  ) : (
+                    <li key={i}>
+                      <button type="button" onClick={() => onClick(list?.path)}>
+                        {list?.label}
+                      </button>
+                    </li>
+                  )
+                )}
               </ul>
             </div>
           ))}
