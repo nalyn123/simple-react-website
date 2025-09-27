@@ -1,12 +1,13 @@
 import "./breadcrumbs.scss";
 import { useBreadcrumbs } from "./breadcrumbs-model";
+import { BreadcrumbsProps } from "./breadcrumbs.interface";
 
 const Breadcrumbs = ({ title }: { title: string }) => {
   const { breadcrumbs, onClick } = useBreadcrumbs();
 
   return (
     <div className="breadcrumbs">
-      {breadcrumbs.map((value: any, index: number) => (
+      {breadcrumbs.map((value: BreadcrumbsProps, index: number) => (
         <button
           className="breadcrumbs__item"
           key={index}
