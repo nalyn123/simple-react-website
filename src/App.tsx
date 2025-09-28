@@ -18,7 +18,7 @@ interface ProtectedRouteProps {
 function App() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename={BASE_URL}>
         <AppController />
       </BrowserRouter>
     </Provider>

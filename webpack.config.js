@@ -1,14 +1,17 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
+
+const BASE_URL = "/simple-react-website/";
 
 module.exports = {
-  mode: "development",
+  mode: process?.env?.NODE_ENV,
   entry: "./src/index.tsx",
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
-    publicPath: "/",
+    publicPath: process?.env?.NODE_ENV === "development" ? "/" : BASE_URL,
   },
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
@@ -45,7 +48,7 @@ module.exports = {
           {
             loader: "css-loader",
             options: {
-              modules: true, // enable CSS Modules
+              modules: true,
             },
           },
           "sass-loader",
@@ -74,14 +77,20 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./public/index.html",
+      // publicPath: process?.env?.NODE_ENV === "development" ? "/" : BASE_URL,
+    }),
+    new webpack.DefinePlugin({
+      BASE_URL: JSON.stringify(
+        process?.env?.NODE_ENV === "development" ? "/" : BASE_URL
+      ),
     }),
   ],
   devServer: {
     static: "./public",
     hot: true,
-    historyApiFallback: true, // for SPA routing
+    historyApiFallback: true,
     devMiddleware: {
-      publicPath: "/", // ensure paths are properly resolved
+      publicPath: "/",
     },
   },
 };
