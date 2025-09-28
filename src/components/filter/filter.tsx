@@ -1,6 +1,6 @@
 import { Close, FilterIcon } from "@assets/images";
 import { useFilter } from "./filter-model";
-import "./filter.scss";
+import styles from "./filter.module.scss";
 import { DatePicker, Dropdown, Input } from "@components/index";
 
 const Filter = () => {
@@ -14,27 +14,31 @@ const Filter = () => {
     onFilterClose,
   } = useFilter();
   return (
-    <div className="products__filter">
+    <div className={styles["products__filter"]}>
       <button
         type="button"
-        className="products__filter__btn"
+        className={styles["products__filter__btn"]}
         onClick={onFilterClick}
       >
         <img src={FilterIcon} alt="filter" />
       </button>
 
       <div
-        className={`products__filter__filter ${
-          isOpen ? "products__filter__filter--active" : ""
+        className={`${styles["products__filter__filter"]} ${
+          isOpen ? styles["products__filter__filter--active"] : ""
         }`}
       >
-        <button type="button" className="close" onClick={onFilterClose}>
+        <button
+          type="button"
+          className={styles["close"]}
+          onClick={onFilterClose}
+        >
           <img src={Close} alt="close" />
         </button>
 
         <div className="row">
           <div className="col col-12 col-sm-3 col-md-6">
-            <div className="products__filter__search">
+            <div className={styles["products__filter__search"]}>
               <Input {...searchInput} />
             </div>
           </div>

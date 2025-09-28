@@ -1,5 +1,5 @@
 import { InputProps } from "./input.interface";
-import "./input.scss";
+import styles from "./input.module.scss";
 
 const Input = (props: InputProps) => {
   const {
@@ -11,18 +11,18 @@ const Input = (props: InputProps) => {
     onChange,
   } = props;
   return (
-    <div className="input">
+    <div className={styles["input"]}>
       <input
         {...props}
         {...(register
           ? register(name, { required: required ? `Please enter ${name}` : "" })
           : null)}
         required={false}
-        className={`input__input ${className ?? ""}`}
+        className={`${styles["input__input"]} ${className ?? ""}`}
         autoComplete="off"
         onChange={onChange}
       />
-      {error && <span className="input__error">{error}</span>}
+      {error && <span className={styles["input__error"]}>{error}</span>}
     </div>
   );
 };

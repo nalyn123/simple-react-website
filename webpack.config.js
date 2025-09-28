@@ -49,7 +49,7 @@ module.exports = {
             loader: "css-loader",
             options: {
               modules: {
-                localIdentName: "[folder]__[local]",
+                localIdentName: "[local]",
                 exportLocalsConvention: "asIs",
               },
               esModule: false,

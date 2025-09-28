@@ -1,15 +1,15 @@
 import { RateProps } from "./rate.interface";
-import "./rate.scss";
+import styles from "./rate.module.scss";
 
 const Rate = (props: RateProps) => {
   const { rate } = props || {};
   return (
-    <div className="rate">
+    <div className={styles["rate"]}>
       {Array.from({ length: 5 }, (_, i) => (
         <div
           key={i}
-          className={`rate__item ${
-            i <= Math.floor(rate) ? "rate__item__active" : ""
+          className={`${styles["rate__item"]} ${
+            i <= Math.floor(rate) ? styles["rate__item__active"] : ""
           }`}
         >
           ★

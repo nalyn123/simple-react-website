@@ -1,6 +1,6 @@
 import { CommonUtils } from "@utils/common-utils";
 import { useNavbar } from "./navbar-model";
-import "./navbar.scss";
+import styles from "./navbar.module.scss";
 import { Logo } from "@assets/images";
 import React from "react";
 
@@ -9,12 +9,14 @@ const Navbar = () => {
     useNavbar();
 
   return (
-    <nav className="navbar">
-      <div className="navbar__header">
-        <img className="navbar__logo" src={Logo} alt="" />
+    <nav className={styles["navbar"]}>
+      <div className={styles["navbar__header"]}>
+        <img className={styles["navbar__logo"]} src={Logo} alt="" />
 
         <button
-          className={`navbar__btn ${burgerActive ? "navbar__btn__active" : ""}`}
+          className={`${styles["navbar__btn"]} ${
+            burgerActive ? styles["navbar__btn__active"] : ""
+          }`}
           onClick={onBurgerClick}
         >
           <span></span>
@@ -24,7 +26,9 @@ const Navbar = () => {
       </div>
 
       <div
-        className={`navbar__menu ${burgerActive ? "navbar__menu__active" : ""}`}
+        className={`${styles["navbar__menu"]} ${
+          burgerActive ? styles["navbar__menu__active"] : ""
+        }`}
       >
         <ul>
           {navLists.map((value, index) =>
@@ -33,7 +37,9 @@ const Navbar = () => {
             ) : (
               <li
                 key={index}
-                className={`${pathname === value?.path ? "active" : ""}`}
+                className={`${
+                  pathname === value?.path ? styles["active"] : ""
+                }`}
               >
                 <button type="button" onClick={() => onClick(value?.path)}>
                   {value?.label}

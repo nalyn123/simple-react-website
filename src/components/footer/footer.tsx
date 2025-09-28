@@ -1,4 +1,4 @@
-import "./footer.scss";
+import styles from "./footer.module.scss";
 import { Logo, Twitter, Facebook, Youtube } from "@assets/images";
 import { useFooter } from "./footer-model";
 import { CommonUtils } from "@utils/common-utils";
@@ -7,13 +7,15 @@ import React from "react";
 const Footer = () => {
   const { auth, footerLists, onClick } = useFooter();
   return (
-    <footer className="footer">
+    <footer className={styles["footer"]}>
       <div className="container">
         <div className="row">
-          <div className="footer__info col col-12 col-sm-12 col-lg-6">
-            <img className="footer__info__logo" src={Logo} alt="" />
+          <div
+            className={`${styles["footer__info"]} col col-12 col-sm-12 col-lg-6`}
+          >
+            <img className={styles["footer__info__logo"]} src={Logo} alt="" />
 
-            <p className="footer__info__desc">
+            <p className={styles["footer__info__desc"]}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
               aliquam velit id gravida tempus. Integer quis ex magna. Etiam vel
               volutpat nunc, quis mollis nibh. Nulla dignissim, ipsum sit amet
@@ -21,7 +23,7 @@ const Footer = () => {
               enim nisl sit amet ex. Cras eu sagittis ligula.
             </p>
 
-            <ul className="footer__info__sm">
+            <ul className={styles["footer__info__sm"]}>
               <li>
                 <a href="#">
                   <img src={Facebook} alt="facebook" />
@@ -41,9 +43,12 @@ const Footer = () => {
           </div>
 
           {footerLists.map((value, index) => (
-            <div key={index} className="footer__links col col-12 col-sm-2">
-              <p className="footer__links__header">{value?.label}</p>
-              <ul className="footer__links__menu">
+            <div
+              key={index}
+              className={`${styles["footer__links"]} col col-12 col-sm-2`}
+            >
+              <p className={styles["footer__links__header"]}>{value?.label}</p>
+              <ul className={styles["footer__links__menu"]}>
                 {value?.children?.map((list, i) =>
                   CommonUtils.checkAuth(list?.auth) ? (
                     <React.Fragment key={i} />

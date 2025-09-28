@@ -1,4 +1,4 @@
-import "./dropdown.scss";
+import styles from "./dropdown.module.scss";
 import { useDropdown } from "./dropdown-model";
 import { DropdownProps } from "./dropdown.interface";
 
@@ -7,20 +7,23 @@ const Dropdown = (props: DropdownProps) => {
   const { ref, active, isOpen, onClick, onItemClick } = useDropdown(props);
 
   return (
-    <div ref={ref} className={`dropdown ${className ?? ""}`}>
+    <div ref={ref} className={`${styles["dropdown"]} ${className}`}>
       <div
-        className={`dropdown__active ${isOpen ? "dropdown__active__open" : ""}`}
+        className={`${styles["dropdown__active"]} ${
+          isOpen ? styles["dropdown__active__open"] : ""
+        }`}
         onClick={onClick}
       >
-        {active?.value ?? placeholder ?? "Select ..."} <i className="arrow"></i>
+        {active?.value ?? placeholder ?? "Select ..."}{" "}
+        <i className={styles["arrow"]}></i>
       </div>
       {isOpen ? (
-        <div className="dropdown__menu">
+        <div className={styles["dropdown__menu"]}>
           <ul>
             {data.map((value, index) => (
               <div
                 key={index}
-                className="dropdown__menu__list"
+                className={styles["dropdown__menu__list"]}
                 onClick={() => onItemClick(value)}
               >
                 {value?.value}
