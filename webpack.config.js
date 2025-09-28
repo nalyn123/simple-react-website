@@ -14,7 +14,7 @@ module.exports = {
     publicPath: process?.env?.NODE_ENV === "development" ? "/" : BASE_URL,
   },
   resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx"],
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".scss"],
     alias: {
       "@assets": path.resolve(__dirname, "./src/assets/"),
       "@components": path.resolve(__dirname, "./src/components/"),
@@ -42,21 +42,25 @@ module.exports = {
         use: "ts-loader",
       },
       {
-        test: /\.module\.s[ac]ss$/i,
+        test: /\.module\.scss$/,
         use: [
           "style-loader",
           {
             loader: "css-loader",
             options: {
-              modules: true,
+              modules: {
+                localIdentName: "[folder]__[local]",
+                exportLocalsConvention: "asIs",
+              },
+              esModule: false,
             },
           },
           "sass-loader",
         ],
       },
       {
-        test: /\.s[ac]ss$/i,
-        exclude: /\.module\.s[ac]ss$/i,
+        test: /\.scss$/,
+        exclude: /\.module\.scss$/,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
