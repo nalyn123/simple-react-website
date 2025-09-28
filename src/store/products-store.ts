@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
+  ProductDateFilterProps,
   ProductFilterProps,
   ProductProps,
   ProductStoreProps,
@@ -10,60 +11,76 @@ import { productFilter } from "@utils/enum";
 
 const initialState: ProductStoreProps = {
   productLists: [],
+  filter: {
+    search: "",
+    sortBy: "",
+    dateFrom: null,
+    dateTo: null,
+  },
 };
 
 export const fetchProducts = createAsyncThunk<
   ProductProps[],
-  ProductFilterProps,
+  undefined,
   { state: RootState }
->(
-  "products/fetchProducts",
-  async ({ key, ...props }: ProductFilterProps, thunkAPI) => {
-    const state = thunkAPI.getState().products;
-    let data = [...products];
+>("products/fetchProducts", async (_, thunkAPI) => {
+  const { filter } = thunkAPI.getState().products || {};
+  let data = [...products];
 
-    if (key && props) {
-      if (key === productFilter.SEARCH) {
-        data = data.filter((value) => {
-          return value?.title
-            .toLowerCase()
-            .includes(props?.value.toLowerCase());
-        });
-      } else if (key === productFilter.SORT_BY) {
-        const [type, order] = props?.value.split(".") as [
-          keyof ProductProps,
-          boolean
-        ];
+  data = data.filter((value) => {
+    let isSearchVisible = true,
+      isDateVisible = true;
 
-        data.sort((a, b) => {
-          const itemA = String(a?.[type]);
-          const itemB = String(b?.[type]);
-          return itemA.localeCompare(itemB);
-        });
-
-        if (order) {
-          data.reverse();
-          console.log(data);
-        }
-      } else if (key === productFilter.DATE) {
-        const startDate = new Date(props?.startDate).getTime();
-        const endDate = new Date(props?.endDate).getTime();
-
-        data = data.filter((value) => {
-          const date = new Date(value?.date).getTime();
-
-          return date >= startDate && date <= endDate;
-        });
-      }
+    if (filter.search) {
+      isSearchVisible = value?.title
+        .toLowerCase()
+        .includes(filter.search.toLowerCase());
     }
-    return data;
+    if (filter.dateFrom && filter.dateTo) {
+      const startDate = filter.dateFrom.getTime();
+      const endDate = filter.dateTo.getTime();
+
+      const date = new Date(value?.date).getTime();
+      isDateVisible = date >= startDate && date <= endDate;
+      console.log(isDateVisible);
+    }
+    return isSearchVisible && isDateVisible;
+  });
+
+  if (filter.sortBy) {
+    const [type, order] = filter.sortBy.split(".") as [
+      keyof ProductProps,
+      string
+    ];
+
+    data.sort((a, b) => {
+      const itemA = String(a?.[type]);
+      const itemB = String(b?.[type]);
+      return itemA.localeCompare(itemB);
+    });
+
+    if (order === "0") {
+      data.reverse();
+    }
   }
-);
+
+  return data;
+});
 
 const productsSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {},
+  reducers: {
+    setFilter: (state, action: PayloadAction<ProductFilterProps>) => {
+      const { key, value } = action.payload || {};
+      (state.filter as any)[key] = value;
+    },
+    setFilterDate: (state, action: PayloadAction<ProductDateFilterProps>) => {
+      const { startDate, endDate } = action.payload || {};
+      state.filter.dateFrom = startDate;
+      state.filter.dateTo = endDate;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(
       fetchProducts.fulfilled,
@@ -74,5 +91,5 @@ const productsSlice = createSlice({
   },
 });
 
-export const {} = productsSlice.actions;
+export const { setFilter, setFilterDate } = productsSlice.actions;
 export default productsSlice.reducer;

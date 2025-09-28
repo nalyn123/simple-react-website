@@ -1,4 +1,4 @@
-import { fetchProducts } from "@store/products-store";
+import { setFilterDate, setFilter } from "@store/products-store";
 import { AppDispatch } from "@store/store";
 import { productFilter } from "@utils/enum";
 import { useState } from "react";
@@ -14,7 +14,7 @@ export const useFilter = () => {
     placeholder: "Search...",
     onChange: (e: any) => {
       const data = { key: productFilter.SEARCH, value: e.target.value };
-      dispatch(fetchProducts(data));
+      dispatch(setFilter(data));
     },
   };
 
@@ -38,17 +38,17 @@ export const useFilter = () => {
   ];
 
   const onSortBy = (value: any) => {
-    dispatch(fetchProducts({ key: productFilter.SORT_BY, value }));
+    const data = { key: productFilter.SORT_BY, value };
+    dispatch(setFilter(data));
   };
 
   const onDateChange = (date: any) => {
     const { startDate, endDate } = date?.selection || {};
     const data = {
-      key: productFilter.DATE,
       startDate,
       endDate,
     };
-    dispatch(fetchProducts(data));
+    dispatch(setFilterDate(data));
   };
 
   const onFilterClick = () => {

@@ -1,16 +1,23 @@
 export interface ProductStoreProps {
   productLists: ProductProps[];
+  filter: ProductFiltersProps;
 }
 
 export interface ProductFiltersProps {
   search: string;
   sortBy: string;
-  dateFrom: string;
-  dateTo: string;
+  dateFrom: Date | null;
+  dateTo: Date | null;
 }
 
 export interface ProductFilterProps {
-  [key: string]: string;
+  key: string;
+  value: string;
+}
+
+export interface ProductDateFilterProps {
+  startDate: Date;
+  endDate: Date;
 }
 
 export interface ProductProps {

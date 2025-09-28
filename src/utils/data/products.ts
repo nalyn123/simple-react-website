@@ -1,12 +1,12 @@
 export const products = [
   {
     id: 0,
-    title: "A Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    title: "BA Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     date: "09/27/2025",
   },
   {
     id: 1,
-    title: "B Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    title: "AA Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     date: "09/20/2025",
   },
   {
@@ -76,7 +76,7 @@ export const products = [
   },
   {
     id: 15,
-    title: "P Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    title: "BP Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     date: "09/27/2025",
   },
 ];
