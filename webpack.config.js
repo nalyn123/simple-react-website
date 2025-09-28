@@ -77,7 +77,7 @@ module.exports = {
     }),
   ],
   devServer: {
-    static: "./dist",
+    static: "./public",
     hot: true,
     historyApiFallback: true, // for SPA routing
     devMiddleware: {

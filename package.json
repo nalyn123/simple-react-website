@@ -1,5 +1,6 @@
 {
   "name": "simple-react-website",
+  "homepage": "https://nalyn123.github.io/simple-react-website/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -28,7 +29,9 @@
     "start": "webpack serve --open",
     "build": "webpack",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "eslintConfig": {
     "extends": [
@@ -56,6 +59,7 @@
     "babel-loader": "^10.0.0",
     "css-loader": "^7.1.2",
     "file-loader": "^6.2.0",
+    "gh-pages": "^6.3.0",
     "html-webpack-plugin": "^5.6.4",
     "sass": "^1.93.0",
     "sass-loader": "^16.0.5",
