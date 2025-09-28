@@ -2,6 +2,7 @@ import { CommonUtils } from "@utils/common-utils";
 import { useNavbar } from "./navbar-model";
 import "./navbar.scss";
 import { Logo } from "@assets/images";
+import React from "react";
 
 const Navbar = () => {
   const { auth, navLists, pathname, burgerActive, onBurgerClick, onClick } =
@@ -28,7 +29,7 @@ const Navbar = () => {
         <ul>
           {navLists.map((value, index) =>
             CommonUtils.checkAuth(value?.auth) ? (
-              <></>
+              <React.Fragment key={index} />
             ) : (
               <li
                 key={index}

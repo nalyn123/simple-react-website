@@ -2,6 +2,7 @@ import "./footer.scss";
 import { Logo, Twitter, Facebook, Youtube } from "@assets/images";
 import { useFooter } from "./footer-model";
 import { CommonUtils } from "@utils/common-utils";
+import React from "react";
 
 const Footer = () => {
   const { auth, footerLists, onClick } = useFooter();
@@ -45,7 +46,7 @@ const Footer = () => {
               <ul className="footer__links__menu">
                 {value?.children?.map((list, i) =>
                   CommonUtils.checkAuth(list?.auth) ? (
-                    <></>
+                    <React.Fragment key={i} />
                   ) : (
                     <li key={i}>
                       <button type="button" onClick={() => onClick(list?.path)}>
