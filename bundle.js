@@ -5602,7 +5602,7 @@ eval("{module.exports = \"data:image/svg+xml;utf8,<svg width=%279px%27 height=%2
 /******/ 	
 /******/ 	/* webpack/runtime/publicPath */
 /******/ 	(() => {
-/******/ 		__webpack_require__.p = "/";
+/******/ 		__webpack_require__.p = "/simple-react-website/";
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */
