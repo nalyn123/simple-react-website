@@ -2,7 +2,7 @@ export const products = [
   {
     id: 0,
     title: "BA Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-    date: "09/27/2025",
+    date: "09/26/2025",
   },
   {
     id: 1,

@@ -42,7 +42,6 @@ export const fetchProducts = createAsyncThunk<
 
       const date = new Date(value?.date).getTime();
       isDateVisible = date >= startDate && date <= endDate;
-      console.log(isDateVisible);
     }
     return isSearchVisible && isDateVisible;
   });
