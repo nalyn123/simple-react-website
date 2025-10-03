@@ -1,4 +1,4 @@
-import "./products.scss";
+import styles from "./products.module.scss";
 import { useProducts } from "./products-model";
 import { ProductItem, Filter } from "@components/index";
 
@@ -7,7 +7,7 @@ const Products = () => {
 
   return (
     <div className="container container--py">
-      <div className="products">
+      <div className={styles["products"]}>
         <Filter />
         <div className="row">
           {productLists.map((value, i) => (

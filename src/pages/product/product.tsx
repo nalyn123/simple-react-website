@@ -1,4 +1,4 @@
-import "./product.scss";
+import styles from "./product.module.scss";
 import { useProducts } from "./product-model";
 import { SampleImg } from "@assets/images";
 import { Rate, Favorite, Breadcrumbs } from "@components/index";
@@ -9,18 +9,22 @@ const Products = () => {
     <div className="container container--py">
       <Breadcrumbs title="Lorem Ipsum" />
 
-      <div className="product">
+      <div className={styles["product"]}>
         <Favorite />
         <div className="row">
           <div className="col col-12 col-sm-4">
-            <img className="product__img w-full" src={SampleImg} alt="" />
+            <img
+              className={styles["product__img"] + " w-full"}
+              src={SampleImg}
+              alt=""
+            />
           </div>
           <div className="col col-12 col-sm-8">
-            <p className="product__title">Lorem Ipsum</p>
+            <p className={styles["product__title"]}>Lorem Ipsum</p>
             <Rate rate={3} />
-            <p className="product__text">Lorem Ipsum</p>
+            <p className={styles["product__text"]}>Lorem Ipsum</p>
 
-            <p className="product__desc">
+            <p className={styles["product__desc"]}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
               aliquam velit id gravida tempus. Integer quis ex magna. Etiam vel
               volutpat nunc, quis mollis nibh. Nulla dignissim, ipsum sit amet
@@ -29,7 +33,7 @@ const Products = () => {
               est.
             </p>
 
-            <button className="product__submit">Lorem Ipsum</button>
+            <button className={styles["product__submit"]}>Lorem Ipsum</button>
           </div>
         </div>
       </div>

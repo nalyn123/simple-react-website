@@ -1,4 +1,4 @@
-import "./login.scss";
+import styles from "./login.module.scss";
 
 import { useLogin } from "./login-model";
 import { Input } from "@components/index";
@@ -8,7 +8,7 @@ const Login = () => {
 
   return (
     <div className="container container--py">
-      <div className="login">
+      <div className={styles["login"]}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input {...inputs?.email} />
           <Input {...inputs?.password} />

@@ -1,4 +1,4 @@
-import "./update-profile.scss";
+import styles from "./update-profile.module.scss";
 
 import { useUpdateProfile } from "./update-profile-model";
 import { Input } from "@components/index";
@@ -8,7 +8,7 @@ const UpdateProfile = () => {
 
   return (
     <div className="container container--py">
-      <div className="update-profile">
+      <div className={styles["update-profile"]}>
         <h1>Update Profile</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input {...inputs?.input} />

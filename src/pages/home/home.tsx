@@ -1,6 +1,6 @@
 import React from "react";
 import { Slider, Banner } from "@components/index";
-import "./home.scss";
+import styles from "./home.module.scss";
 import { useHome } from "./home-model";
 const Home = () => {
   const { carouselMain, carouselBody, dataMain, dataBody } = useHome();
@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <>
       <Banner {...carouselMain} data={dataMain} />
-      <div className="slider-wrap">
+      <div className={styles["slider-wrap"]}>
         {Array.from({ length: 5 }, (_, i) => (
           <Slider key={i} {...carouselBody} data={dataBody} />
         ))}
