@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const BASE_URL = "/simple-react-website/";
 
@@ -19,6 +20,7 @@ module.exports = {
       "@assets": path.resolve(__dirname, "./src/assets/"),
       "@components": path.resolve(__dirname, "./src/components/"),
       "@pages": path.resolve(__dirname, "./src/pages/"),
+      "@template": path.resolve(__dirname, "./src/template/"),
       "@utils": path.resolve(__dirname, "./src/utils/"),
       "@store": path.resolve(__dirname, "./src/store/"),
       // "@": path.resolve(__dirname, "./src/"),
@@ -81,12 +83,15 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./public/index.html",
-      // publicPath: process?.env?.NODE_ENV === "development" ? "/" : BASE_URL,
+      publicPath: process?.env?.NODE_ENV === "development" ? "/" : BASE_URL,
     }),
     new webpack.DefinePlugin({
       BASE_URL: JSON.stringify(
         process?.env?.NODE_ENV === "development" ? "/" : BASE_URL
       ),
+    }),
+    new CopyPlugin({
+      patterns: [{ from: "public/index.html", to: "404.html" }],
     }),
   ],
   devServer: {

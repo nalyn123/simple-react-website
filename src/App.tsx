@@ -1,14 +1,13 @@
 import React, { ComponentType, useEffect } from "react";
 import "./App.scss";
 
-import { Navbar, Footer } from "@components/index";
-
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { routes } from "./router";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState, store } from "@store/store";
 import { fetchUser } from "@store/user-store";
 import { CommonUtils } from "@utils/common-utils";
+import { Layout } from "@template/index";
 
 interface ProtectedRouteProps {
   component: ComponentType;
@@ -57,16 +56,6 @@ const ProtectedRoute = (props: ProtectedRouteProps) => {
   }
 
   return <Layout component={props?.component} />;
-};
-
-const Layout = ({ component: Component }: { component: ComponentType }) => {
-  return (
-    <>
-      <Navbar />
-      <Component />
-      <Footer />
-    </>
-  );
 };
 
 export default App;

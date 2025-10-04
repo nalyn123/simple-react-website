@@ -10,3 +10,5 @@ export { default as DatePicker } from "./datepicker/datepicker";
 export { default as Rate } from "./rate/rate";
 export { default as Favorite } from "./favorite/favorite";
 export { default as Breadcrumbs } from "./breadcrumbs/breadcrumbs";
+export * as Modal from "./modal/modal";
+export { ModalProvider } from "./modal/modal";
