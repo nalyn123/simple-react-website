@@ -91,7 +91,7 @@ module.exports = {
       ),
     }),
     new CopyPlugin({
-      patterns: [{ from: "public/index.html", to: "404.html" }],
+      patterns: [{ from: "dist/index.html", to: "404.html" }],
     }),
   ],
   devServer: {
