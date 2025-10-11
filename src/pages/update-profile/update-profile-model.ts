@@ -4,6 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@store/store";
 import { fetchLogin, fetchUserUpdate } from "@store/user-store";
 import { useNavigate, useParams } from "react-router-dom";
+import { useMemo } from "react";
+
+interface Form {
+  email?: string;
+  name?: string;
+}
 
 export const useUpdateProfile = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -17,30 +23,75 @@ export const useUpdateProfile = () => {
     formState: { errors },
   } = useForm<FormData>();
 
-  const inputs = {
-    input: {
-      type: type === "email" ? "email" : "text",
-      name: type,
-      placeholder: type,
-      register,
-      required: true,
-      error: type ? errors?.[type]?.message : "",
-    },
-    submit: {
-      type: "submit",
-      value: "Update",
-      className: "btn",
-    },
-  };
+  const inputForms = useMemo(
+    () => ({
+      name: {
+        title: "Update Name",
+        inputs: [
+          {
+            type: "text",
+            name: "firstname",
+            placeholder: "First Name",
+            register,
+            required: true,
+            error: errors?.firstname?.message,
+          },
+          {
+            type: "text",
+            name: "lastname",
+            placeholder: "Last Name",
+            register,
+            required: true,
+            error: errors?.lastname?.message,
+          },
+          {
+            type: "submit",
+            value: "Save",
+            className: "btn",
+          },
+        ],
+        onSubmit: (data: FormData) => {
+          const updateData = {
+            firstname: data?.firstname,
+            lastname: data?.lastname,
+          };
+          onSubmit(updateData);
+        },
+      },
+      email: {
+        title: "Update Email",
+        inputs: [
+          {
+            type: "email",
+            name: "email",
+            placeholder: "Email",
+            register,
+            required: true,
+            error: errors?.email?.message,
+          },
+          {
+            type: "submit",
+            value: "Save",
+            className: "btn",
+          },
+        ],
+        onSubmit: (data: FormData) => {
+          const updateData = {
+            email: data?.email,
+          };
+          onSubmit(updateData);
+        },
+      },
+    }),
+    []
+  );
 
-  const onSubmit = (data: FormData) => {
-    const updateData = {
-      type,
-      value: type ? data?.[type] : "",
-    };
+  const inputs = useMemo(() => inputForms[type as keyof typeof inputForms], []);
+
+  const onSubmit = (updateData: FormData) => {
     dispatch(fetchUserUpdate(updateData));
     navigate("/settings");
   };
 
-  return { inputs, handleSubmit, onSubmit };
+  return { inputs, handleSubmit };
 };

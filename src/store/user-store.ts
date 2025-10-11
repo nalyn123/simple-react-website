@@ -41,11 +41,11 @@ export const fetchUserUpdate = createAsyncThunk<
   AuthProps,
   InputProps,
   { state: RootState }
->("users/fetchUserUpdate", async ({ type, value }: InputProps, thunkAPI) => {
+>("users/fetchUserUpdate", async (params: AuthProps, thunkAPI) => {
   const state = thunkAPI.getState()?.user;
   const data = {
     ...state?.auth,
-    [type ?? ""]: value,
+    ...params,
   };
 
   await CommonUtils.setToken(data);

@@ -14,8 +14,11 @@ const Settings = () => {
           <img src={Logo} alt="profile" />
         </div>
 
-        <FormInput name="firstname" label="Firstname" value={auth?.firstname} />
-        <FormInput name="lastname" label="Lastname" value={auth?.lastname} />
+        <FormInput
+          name="name"
+          label="Name"
+          value={`${auth?.firstname} ${auth?.lastname}`}
+        />
         <FormInput
           name="email"
           label="Email"
