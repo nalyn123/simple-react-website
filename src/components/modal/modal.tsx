@@ -4,17 +4,16 @@ import styles from "./modal.module.scss";
 import { CloseViolet } from "@assets/images";
 
 const Modal = forwardRef<ModalRef>((_, ref) => {
-  const [isOpen, setIsOpen] = useState(false);
   const [content, setContent] = useState<DataProps[]>([]);
 
   const show = (data: DataProps) => {
-    setIsOpen(true);
-    setContent((prev) => [...prev, data]);
+    const id = new Date().toString();
+    const index = content.findIndex((value) => value.id === data?.id);
+    if (index === -1) setContent((prev) => [...prev, { id, ...data }]);
   };
 
   const hide = (id?: string) => {
     const newContent = content.filter((value) => value?.id !== id);
-    setIsOpen(false);
     setContent(newContent);
   };
 
@@ -29,7 +28,7 @@ const Modal = forwardRef<ModalRef>((_, ref) => {
     hide,
   }));
 
-  if (!isOpen && !content) return null;
+  if (!content) return null;
 
   return content?.map((value, index) => (
     <div key={index} className={styles["modal"]} onClick={onClick}>
