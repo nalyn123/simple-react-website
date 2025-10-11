@@ -1,4 +1,10 @@
-import { createRef, forwardRef, useImperativeHandle, useState } from "react";
+import {
+  createRef,
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useState,
+} from "react";
 import { ModalRef, DataProps } from "./modal.interface";
 import styles from "./modal.module.scss";
 import { CloseViolet } from "@assets/images";
@@ -6,16 +12,24 @@ import { CloseViolet } from "@assets/images";
 const Modal = forwardRef<ModalRef>((_, ref) => {
   const [content, setContent] = useState<DataProps[]>([]);
 
-  const show = (data: DataProps) => {
-    const id = new Date().toString();
-    const index = content.findIndex((value) => value.id === data?.id);
-    if (index === -1) setContent((prev) => [...prev, { id, ...data }]);
-  };
+  const show = useCallback(
+    (data: DataProps) => {
+      const id = new Date().toString();
+      const index = content.findIndex((value) => value.id === data?.id);
 
-  const hide = (id?: string) => {
-    const newContent = content.filter((value) => value?.id !== id);
-    setContent(newContent);
-  };
+      if (index === -1) setContent((prev) => [...prev, { id, ...data }]);
+    },
+    [content]
+  );
+
+  const hide = useCallback(
+    (id?: string) => {
+      setContent((prev) =>
+        id ? prev.filter((v) => v.id !== id) : prev.slice(0, -1)
+      );
+    },
+    [content]
+  );
 
   const onClick = (e: any) => {
     if (e.target.classList.contains("modal")) {
